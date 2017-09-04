@@ -1,12 +1,18 @@
 # CMTPRG01-5-praktijkopdracht-materialenapp
 
-:recycle: Registratie van het verwerken van materialen van diversen milieuparken in Rotterdam.
+:recycle: Registratie van het verwerken van materialen van diversen milieuparken in Rotterdam. :recycle:
 
-######Startup development
+**Info:**
+- python 3.5.2
+- pip 9.0.1
 
-<dl> 
-    <dt> Activate virtual environment:</dt>
+**Start-up development**
+
+Activate virtual environment:  
+    `$ source venv/bin/activate`
     
-    source ./env/bin/activate
-</dl>
+Deactivate virtual environment:  
+    `$ deactivate`
+
+
 
