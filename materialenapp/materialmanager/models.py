@@ -89,7 +89,7 @@ class Delivery(models.Model):
 
     # Function for showing the image thumb in the list Delivery.admin
     def image_pdf(self):
-        return 'http://buurman.nickderonde.tech%s' % self.photo.url
+        return 'http://127.0.0.1%s' % self.photo.url
 
     image.allow_tags = True
     image_pdf.allow_tags = True
