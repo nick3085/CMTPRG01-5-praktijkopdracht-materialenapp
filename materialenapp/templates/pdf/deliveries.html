@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Buurman - material application - {{ time }}</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+            width: auto;
+            height: auto;
+        }
+
+        .wrapper {
+            float: left;
+        }
+
+        .firstpage {
+
+        }
+
+        .header {
+            font-size: 28px;
+            font-weight: 100;
+            text-align: center;
+            color: #fb6539;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+        }
+
+        .title span {
+            color: #007cae;
+        }
+
+        .date_time {
+            font-size: 14px;
+            font-weight: lighter;
+            color: darkgrey;
+        }
+
+        .details {
+            display: inline-block;
+            position: relative;
+            float: left;
+            padding: 15px;
+            text-align: left !important;
+            width: 40%;
+            height: auto;
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #fb6539; /* old IE */
+            background-color: #fff; /* Modern Browsers */
+        }
+
+        .image_container {
+            display: inline-block;
+            position: relative;
+            height: auto;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .image_container img {
+            width: 300px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+    <div class="firstpage">
+        <div class='header'>
+            <p class='title'>Deliveries Buurman</p>
+            <p class='date_time'>Log created at: {{ time }}</p>
+        </div>
+    </div>
+
+    <hr class='hrItem'/>
+    {% for delivery in deliveries %}
+        <div class='details'>
+            <span style="font-weight: bold;">Database-ID:</span> {{ delivery.id }} <br/>
+            <span style="font-weight: bold;">Date:</span> {{ delivery.date }} <br/>
+            <span style="font-weight: bold;">supplier:</span> {{ delivery.supplier }}<br/>
+            <span style="font-weight: bold;">location:</span> {{ delivery.location }}<br/>
+            <span style="font-weight: bold;">processing:</span> {{ delivery.processing }}% <br/>
+            <span style="font-weight: bold;">categories:</span> {{ delivery.categories_to_string }}<br/>
+            <span style="font-weight: bold;">weight:</span> {{ delivery.weight }} KG<br/>
+            <span style="font-weight: bold;">notes:</span> {{ delivery.notes }}<br/>
+            <div class="image_container">
+                <img src="{{ delivery.image_pdf }}" alt="{{ delivery.date }}">
+            </div>
+            <hr class='hrItem'/>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
