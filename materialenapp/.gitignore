@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+.idea/*
+materialenapp/__pycache__/
+materialenapp/settings.py
+materialmanager/__init__.py
+materialmanager/__pycache__/
