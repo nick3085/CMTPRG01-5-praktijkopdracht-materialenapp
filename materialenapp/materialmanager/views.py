@@ -9,6 +9,10 @@ from xhtml2pdf import pisa
 from .models import Delivery
 
 
+def index(request):
+    return HttpResponse("Index page of the materialmanager")
+
+
 def get_pdf(request):
     data = Delivery.objects.all()
     template = get_template('pdf/deliveries.html')

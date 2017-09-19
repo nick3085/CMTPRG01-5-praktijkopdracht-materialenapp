@@ -11,9 +11,11 @@ from django.utils import timezone
 # location model
 class Location(models.Model):
     location = models.CharField(max_length=50, null=False, blank=False)
+    pass
 
     class Meta:
         db_table = "location"
+        verbose_name_plural = "locations"
 
     def __str__(self):
         return self.location
@@ -22,6 +24,7 @@ class Location(models.Model):
 # supplier model
 class Supplier(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
+    Headquarters_location = models.ForeignKey('Location', related_name='Supplier')
 
     class Meta:
         db_table = "supplier"
@@ -73,11 +76,13 @@ class Delivery(models.Model):
     )
     categories = models.ManyToManyField(Category)
     weight = models.IntegerField(null=True, blank=True)
-    notes = models.TextField(null=True, blank=True, max_length=1000)
+    note = models.TextField(null=True, blank=True, max_length=1000)
+    active = models.BooleanField()
 
     class Meta:
         db_table = "delivery"
         verbose_name_plural = "deliveries"
+        ordering = ('date', 'supplier', 'processing', 'weight',)
 
     def __str__(self):
         return self.date.strftime("%A, %d. %B %Y %I:%M%p")
@@ -95,7 +100,7 @@ class Delivery(models.Model):
     image_pdf.allow_tags = True
 
     # return the model categories as string manytomany
-    def categories_to_string(self):
+    def category(self):
         return_string = ""
         for category in self.categories.all():
             return_string += str(category)
