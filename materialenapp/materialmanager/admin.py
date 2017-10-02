@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib import admin
 from django.forms import CheckboxSelectMultiple
-from django.template.loader import render_to_string
 
 from .models import Delivery, Category, Location, Supplier
 

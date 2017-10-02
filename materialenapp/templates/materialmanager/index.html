@@ -1,0 +1,14 @@
+<h1>Deliveries overview</h1>
+{% if all_deliveries %}
+    <ul>
+        {% for delivery in all_deliveries %}
+
+            <li>
+                <a href="{% url 'materialmanager:detail' delivery.id %}"> {{ delivery.date }}  </a>
+            </li>
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> There are no deliveries </p>
+{% endif %}

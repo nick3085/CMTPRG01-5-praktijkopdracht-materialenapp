@@ -1,11 +1,10 @@
 from __future__ import unicode_literals
-
 from django_resized import ResizedImageField
-
-from datetime import date
-
 from django.db import models
 from django.utils import timezone
+
+# String variable for the home link url
+link = 'http://127.0.0.1:8000'
 
 
 # location model
@@ -92,12 +91,12 @@ class Delivery(models.Model):
         return '<a href="%s"' % self.photo.url + '><img src="%s" alt="Uploaded picture" width="150"/></a>' \
                                                  % self.photo.url
 
-    # Function for showing the image thumb in the list Delivery.admin
-    def image_pdf(self):
-        return 'http://127.0.0.1%s' % self.photo.url
+    # Function for showing the full image
+    def image_full(self):
+        return link + self.photo.url
 
     image.allow_tags = True
-    image_pdf.allow_tags = True
+    image_full.allow_tags = True
 
     # return the model categories as string manytomany
     def category(self):
