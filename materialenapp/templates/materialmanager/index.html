@@ -1,14 +1,38 @@
-<h1>Deliveries overview</h1>
-{% if all_deliveries %}
-    <ul>
-        {% for delivery in all_deliveries %}
+{% extends 'materialmanager/base.html' %}
 
-            <li>
-                <a href="{% url 'materialmanager:detail' delivery.id %}"> {{ delivery.date }}  </a>
-            </li>
+{% block body %}
 
-        {% endfor %}
-    </ul>
-{% else %}
-    <p> There are no deliveries </p>
-{% endif %}
+    <div class="card mr-md-3">
+        <div class="card-header">
+            Note:
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Welcome at the Buurman Materialmanager</h4>
+            <p class="card-text">A system to register recycling at Rotterdam</p>
+        </div>
+    </div>
+
+    {% if all_deliveries %}
+        <div class="row">
+            {% for delivery in all_deliveries %}
+                <div class="col-sm-4">
+                    <div class="card row mr-md-3">
+                        <img class="card-img-top" src="{{ delivery.image_full }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ delivery.date }}</h4>
+                            <p class="card-text"> Categories: {{ delivery.category }}</p>
+                            <a class="btn btn-primary" href="{% url 'materialmanager:detail' delivery.id %}"> Go to
+                                detail </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            There are no deliveries
+        </div>
+        <p> There are no deliveries </p>
+    {% endif %}
+    </div>
+{% endblock %}

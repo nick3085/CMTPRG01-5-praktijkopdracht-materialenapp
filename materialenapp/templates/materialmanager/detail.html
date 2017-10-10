@@ -1,9 +1,19 @@
-<h1>date: {{ delivery.date }}</h1>
-<img src="{{ delivery.image_full }}" alt="{{ delivery.category }}">
-<p>Status: {{ delivery.active }}</p>
-<p>Location: {{ delivery.location }}</p>
-<p>Supplier: {{ delivery.supplier }}</p>
-<p>Processing: {{ delivery.processing }}%</p>
-<p>Categories: {{ delivery.category }}</p>
-<p>Weight: {{ delivery.weight }} KG</p>
-<p>Note: {{ delivery.note }}</p>
+{% extends 'materialmanager/base.html' %}
+
+{% block body %}
+    <div class="row">
+        <div class="card mb-3" style="max-width: 80rem;">
+            <img class="card-img-top" src="{{ delivery.image_full }}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{ delivery.date }}</h4>
+                <p class="card-text"> Status: {{ delivery.active }}</p>
+                <p class="card-text"> Location: {{ delivery.location }}</p>
+                <p class="card-text"> Supplier: {{ delivery.supplier }}</p>
+                <p class="card-text"> Processing: {{ delivery.processing }}%</p>
+                <p class="card-text"> Categories: {{ delivery.category }}</p>
+                <p class="card-text"> Weight: {{ delivery.weight }} KG</p>
+                <p class="card-text"> Note: {{ delivery.note }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

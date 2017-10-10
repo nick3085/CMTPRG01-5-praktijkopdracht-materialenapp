@@ -11,7 +11,7 @@ from .models import Delivery
 # Index model for the deliveries in materialmanager
 def index(request):
     all_deliveries = Delivery.objects.all()
-    context = {'all_deliveries': all_deliveries,}
+    context = {'all_deliveries': all_deliveries}
     return render(request, 'materialmanager/index.html', context)
 
 
@@ -20,6 +20,10 @@ def detail(request, delivery_id):
     delivery = get_object_or_404(Delivery, pk=delivery_id)
     context = {'delivery': delivery}
     return render(request, 'materialmanager/detail.html', context)
+
+
+# def status(request, delivery_id):
+#     delivery = get_object_or_404(Delivery, pk=delivery_id)
 
 
 # function for the pdf generator request
