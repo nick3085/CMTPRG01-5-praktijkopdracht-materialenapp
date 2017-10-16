@@ -103,3 +103,4 @@ ENV/
 # Static folders
 /media_cdn/*
 /static_cdn/*
+media_cdn/*/*.jpg

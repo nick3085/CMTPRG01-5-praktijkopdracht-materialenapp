@@ -1,14 +1,14 @@
 {% extends 'materialmanager/base.html' %}
+{% block title %} Material overview {% endblock %}
 
 {% block body %}
-
     <div class="card mr-md-3">
         <div class="card-header">
             Note:
         </div>
         <div class="card-body">
             <h4 class="card-title">Welcome at the Buurman Materialmanager</h4>
-            <p class="card-text">A system to register recycling at Rotterdam</p>
+            <p class="card-text">A system to register the recycling of materials at Rotterdam</p>
         </div>
     </div>
 
@@ -20,9 +20,24 @@
                         <img class="card-img-top" src="{{ delivery.image_full }}" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title">{{ delivery.date }}</h4>
-                            <p class="card-text"> Categories: {{ delivery.category }}</p>
-                            <a class="btn btn-primary" href="{% url 'materialmanager:detail' delivery.id %}"> Go to
+
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+
+                            <p class="card-text categories"> Categories: {{ delivery.category }}</p>
+                            <a class="btn btn-primary btn-sm" href="{% url 'materialmanager:detail' delivery.id %}"> Go to
                                 detail </a>
+
+                            <form action="{% url 'materialmanager:delivery-delete' delivery.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="delivery_id" value="{{ delivery.id }}" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <span>Delete</span>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

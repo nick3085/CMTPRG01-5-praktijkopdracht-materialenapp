@@ -1,29 +1,42 @@
 from io import BytesIO
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.template.loader import get_template
-from django.shortcuts import render, get_object_or_404
 from django.utils.datetime_safe import datetime
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 
 from xhtml2pdf import pisa
 from .models import Delivery
 
 
-# Index model for the deliveries in materialmanager
-def index(request):
-    all_deliveries = Delivery.objects.all()
-    context = {'all_deliveries': all_deliveries}
-    return render(request, 'materialmanager/index.html', context)
+# Generic Index model for the deliveries in materialmanager
+class IndexView(ListView):
+    template_name = 'materialmanager/index.html'
+    context_object_name = 'all_deliveries'
+
+    def get_queryset(self):
+        return Delivery.objects.all()
 
 
-# Detail model for delivery in materialmanager
-def detail(request, delivery_id):
-    delivery = get_object_or_404(Delivery, pk=delivery_id)
-    context = {'delivery': delivery}
-    return render(request, 'materialmanager/detail.html', context)
+# Generic Detail model for delivery in materialmanager
+class DetailDeliveryView(DetailView):
+    model = Delivery
+    template_name = 'materialmanager/detail.html'
 
 
-# def status(request, delivery_id):
-#     delivery = get_object_or_404(Delivery, pk=delivery_id)
+class DeliveryCreate(CreateView):
+    model = Delivery
+    fields = ['supplier', 'location', 'photo', 'processing', 'categories', 'weight', 'note', 'active']
+
+
+class DeliveryUpdate(UpdateView):
+    model = Delivery
+    fields = ['supplier', 'location', 'photo', 'processing', 'categories', 'weight', 'note', 'active']
+
+
+class DeliveryDelete(DeleteView):
+    model = Delivery
+    success_url = reverse_lazy('materialmanager:index')
 
 
 # function for the pdf generator request

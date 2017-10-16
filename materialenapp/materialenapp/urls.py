@@ -22,8 +22,8 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^materialmanager/', include('materialmanager.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^materialmanager/', include('materialmanager.urls', namespace='delivery')),
+    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^$', views.index, name='index'),
 ]
 

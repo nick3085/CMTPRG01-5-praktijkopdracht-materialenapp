@@ -44,11 +44,9 @@
 <body>
     <h1>Buurman - Materialapp</h1>
     <div class="link">
-        <a class="link" href="{{ link }}/admin/materialmanager/delivery/add/">Add Delivery</a>
-        <a class="link" href="{{ link }}/admin/materialmanager/location/add/">Add Location</a>
-        <a class="link" href="{{ link }}/admin/materialmanager/supplier/add/">Add Supplier</a>
+        <a class="link" href="{% url 'materialmanager:index' %}">Material manager</a>
         <a class="link" href="{{ link }}/admin">Admin Panel</a>
-        <a class="link" href="{{ link }}/materialmanager/pdf">PDF export</a>
+        <a class="link" href="{% url 'materialmanager:delivery-pdf' %}">Generate PDF</a>
     </div>
 
     <p>

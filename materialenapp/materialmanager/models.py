@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django_resized import ResizedImageField
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 # String variable for the home link url
 link = 'http://127.0.0.1:8000'
@@ -76,7 +77,7 @@ class Delivery(models.Model):
     categories = models.ManyToManyField(Category)
     weight = models.IntegerField(null=True, blank=True)
     note = models.TextField(null=True, blank=True, max_length=1000)
-    active = models.BooleanField()
+    active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "delivery"
@@ -105,3 +106,6 @@ class Delivery(models.Model):
             return_string += str(category)
             return_string += ", "
         return return_string
+
+    def get_absolute_url(self):
+        return reverse('delivery:detail', kwargs={'pk': self.pk})

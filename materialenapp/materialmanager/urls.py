@@ -7,16 +7,21 @@ from django.conf.urls.static import static
 app_name = 'materialmanager'
 
 urlpatterns = [
-    # /materialmanager/
-    url(r'^$', views.index, name='index'),
+      # index view /materialmanager/
+      url(r'^$', views.IndexView.as_view(), name='index'),
 
-    # /materialmanager/delivery_id/
-    url(r'^(?P<delivery_id>[0-9]+)/$', views.detail, name='detail'),
+      # detail delivery view
+      url(r'^(?P<pk>[0-9]+)/$', views.DetailDeliveryView.as_view(), name='detail'),
 
-    # /materialmanager/delivery_id/active
-    url(r'^(?P<delivery_id>[0-9]+)/$', views.detail, name='active'),
+      # add delivery view
+      url(r'^delivery/add/$', views.DeliveryCreate.as_view(), name='delivery-add'),
 
+      # update delivery view
+      url(r'^delivery/(?P<pk>[0-9]+)/$', views.DeliveryUpdate.as_view(), name='delivery-update'),
 
-    # /materialmanager/pdf/
-    url(r'^pdf$', views.get_pdf, name='delivery_pdf'),
+      # delete delivery view
+      url(r'^delivery/(?P<pk>[0-9]+)/delete/$', views.DeliveryDelete.as_view(), name='delivery-delete'),
+
+      # /materialmanager/pdf/
+      url(r'^pdf/$', views.get_pdf, name='delivery-pdf'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
