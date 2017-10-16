@@ -101,5 +101,5 @@ ENV/
 .mypy_cache/
 
 # Static folders
-media_cdn
 /static_cdn/*
+/media_cdn/
