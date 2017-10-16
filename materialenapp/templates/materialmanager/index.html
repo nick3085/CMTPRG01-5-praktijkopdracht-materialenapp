@@ -2,13 +2,15 @@
 {% block title %} Material overview {% endblock %}
 
 {% block body %}
-    <div class="card mr-md-3">
+    <div class="card mr-md-4">
         <div class="card-header">
             Note:
         </div>
         <div class="card-body">
-            <h4 class="card-title">Welcome at the Buurman Materialmanager</h4>
+            <h3 class="card-title">Hello {{ user.username }}</h3>
+            <h5 class="card-title">Welcome at the Buurman Materialmanager</h5>
             <p class="card-text">A system to register the recycling of materials at Rotterdam</p>
+            <a class="btn btn-primary" href="{% url 'materialmanager:delivery-add' %}">+ Add Delivery</a>
         </div>
     </div>
 
@@ -27,13 +29,15 @@
                             </label>
 
                             <p class="card-text categories"> Categories: {{ delivery.category }}</p>
-                            <a class="btn btn-primary btn-sm" href="{% url 'materialmanager:detail' delivery.id %}"> Go to
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'materialmanager:detail' delivery.id %}"> Go to
                                 detail </a>
 
-                            <form action="{% url 'materialmanager:delivery-delete' delivery.id %}" method="post" style="display: inline;">
+                            <form action="{% url 'materialmanager:delivery-delete' delivery.id %}" method="post"
+                                  style="display: inline;">
                                 {% csrf_token %}
-                                <input type="hidden" name="delivery_id" value="{{ delivery.id }}" />
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <input type="hidden" name="delivery_id" value="{{ delivery.id }}"/>
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
                                     <span>Delete</span>
                                 </button>
                             </form>
@@ -43,11 +47,11 @@
                 </div>
             {% endfor %}
         </div>
+
     {% else %}
         <div class="alert alert-warning" role="alert">
             There are no deliveries
         </div>
         <p> There are no deliveries </p>
     {% endif %}
-    </div>
 {% endblock %}
