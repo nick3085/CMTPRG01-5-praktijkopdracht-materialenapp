@@ -1,0 +1,29 @@
+{% extends 'materialmanager/base.html' %}
+
+{% block body %}
+    <div class="row">
+        <div class="card mb-3" style="max-width: 80rem;">
+            <img class="card-img-top" src="{{ delivery.image_full }}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{ delivery.date }}</h4>
+                <p class="card-text"> Status: {{ delivery.active }}</p>
+                <p class="card-text"> Location: {{ delivery.location }}</p>
+                <p class="card-text"> Supplier: {{ delivery.supplier }}</p>
+                <p class="card-text"> Processing: {{ delivery.processing }}%</p>
+                <p class="card-text"> Categories: {{ delivery.category }}</p>
+                <p class="card-text"> Weight: {{ delivery.weight }} KG</p>
+                <p class="card-text"> Note: {{ delivery.note }}</p>
+                <a class="btn btn-warning btn-sm" href="{% url 'materialmanager:delivery-update' delivery.id %}">
+                    Edit </a>
+                <form action="{% url 'materialmanager:delivery-delete' delivery.id %}" method="post"
+                      style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="delivery_id" value="{{ delivery.id }}"/>
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <span>Delete</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

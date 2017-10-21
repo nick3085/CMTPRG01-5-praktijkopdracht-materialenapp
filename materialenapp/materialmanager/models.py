@@ -1,19 +1,26 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django_resized import ResizedImageField
-
-from datetime import date
-
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
+
+if settings.DEBUG:
+    link = 'http://127.0.0.1:8000'
+
+else:
+    link = 'http://buurman.nickderonde.tech'
 
 
 # location model
 class Location(models.Model):
     location = models.CharField(max_length=50, null=False, blank=False)
+    pass
 
     class Meta:
         db_table = "location"
+        verbose_name_plural = "locations"
 
     def __str__(self):
         return self.location
@@ -22,6 +29,7 @@ class Location(models.Model):
 # supplier model
 class Supplier(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
+    Headquarters_location = models.ForeignKey('Location', related_name='Supplier')
 
     class Meta:
         db_table = "supplier"
@@ -44,7 +52,7 @@ class Category(models.Model):
 
 
 # function for the upload_location
-def upload_location(instance, filename):
+def upload_location(instance: object, filename: object) -> object:
     return "%s/%s" % (instance.date.strftime('%Y'), filename)
 
 
@@ -73,11 +81,13 @@ class Delivery(models.Model):
     )
     categories = models.ManyToManyField(Category)
     weight = models.IntegerField(null=True, blank=True)
-    notes = models.TextField(null=True, blank=True, max_length=1000)
+    note = models.TextField(null=True, blank=True, max_length=1000)
+    active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "delivery"
         verbose_name_plural = "deliveries"
+        ordering = ('date', 'supplier', 'processing', 'weight',)
 
     def __str__(self):
         return self.date.strftime("%A, %d. %B %Y %I:%M%p")
@@ -87,17 +97,23 @@ class Delivery(models.Model):
         return '<a href="%s"' % self.photo.url + '><img src="%s" alt="Uploaded picture" width="150"/></a>' \
                                                  % self.photo.url
 
-    # Function for showing the image thumb in the list Delivery.admin
+    # Function for showing the full image
+    def image_full(self):
+        return "%s" % self.photo.url
+
+    # Function for showing the full image
     def image_pdf(self):
-        return 'http://buurman.nickderonde.tech%s' % self.photo.url
+        return link + self.photo.url
 
     image.allow_tags = True
-    image_pdf.allow_tags = True
 
     # return the model categories as string manytomany
-    def categories_to_string(self):
+    def category(self):
         return_string = ""
         for category in self.categories.all():
             return_string += str(category)
             return_string += ", "
         return return_string
+
+    def get_absolute_url(self):
+        return reverse('delivery:detail', kwargs={'pk': self.pk})

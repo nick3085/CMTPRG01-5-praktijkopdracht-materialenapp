@@ -12,6 +12,9 @@
 Activate virtual environment:  
     `$ source venv/bin/activate`
     
+Start server:
+    `$ python manage.py runserver`
+    
 Deactivate virtual environment:  
     `$ deactivate`
 

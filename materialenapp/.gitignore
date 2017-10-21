@@ -14,4 +14,8 @@ ENV/
 materialenapp/__pycache__/
 materialenapp/settings.py
 materialmanager/__init__.py
+/media_cdn/
+/static_cdn/
 materialmanager/__pycache__/
+
+/materialenapp/settings.py
