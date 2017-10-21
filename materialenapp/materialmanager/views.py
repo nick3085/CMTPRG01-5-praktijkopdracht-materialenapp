@@ -9,7 +9,7 @@ from xhtml2pdf import pisa
 from .models import Delivery
 
 
-# Generic Index model for the deliveries in materialmanager
+# Generic Index deliveries
 class IndexView(ListView):
     template_name = 'materialmanager/index.html'
     context_object_name = 'all_deliveries'
@@ -18,22 +18,25 @@ class IndexView(ListView):
         return Delivery.objects.all()
 
 
-# Generic Detail model for delivery in materialmanager
+# Generic Detail delivery
 class DetailDeliveryView(DetailView):
     model = Delivery
     template_name = 'materialmanager/detail.html'
 
 
+# Generic Create Detail delivery
 class DeliveryCreate(CreateView):
     model = Delivery
     fields = ['supplier', 'location', 'photo', 'processing', 'categories', 'weight', 'note', 'active']
 
 
+# Generic Update Detail delivery
 class DeliveryUpdate(UpdateView):
     model = Delivery
     fields = ['supplier', 'location', 'photo', 'processing', 'categories', 'weight', 'note', 'active']
 
 
+# Generic delete Detail delivery
 class DeliveryDelete(DeleteView):
     model = Delivery
     success_url = reverse_lazy('materialmanager:index')

@@ -1,11 +1,16 @@
 from __future__ import unicode_literals
+
+from django.conf import settings
 from django_resized import ResizedImageField
 from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 
-# String variable for the home link url
-link = 'http://127.0.0.1:8000'
+if settings.DEBUG:
+    link = 'http://127.0.0.1:8000'
+
+else:
+    link = 'http://buurman.nickderonde.tech'
 
 
 # location model
@@ -47,7 +52,7 @@ class Category(models.Model):
 
 
 # function for the upload_location
-def upload_location(instance, filename):
+def upload_location(instance: object, filename: object) -> object:
     return "%s/%s" % (instance.date.strftime('%Y'), filename)
 
 
@@ -94,10 +99,13 @@ class Delivery(models.Model):
 
     # Function for showing the full image
     def image_full(self):
+        return "%s" % self.photo.url
+
+    # Function for showing the full image
+    def image_pdf(self):
         return link + self.photo.url
 
     image.allow_tags = True
-    image_full.allow_tags = True
 
     # return the model categories as string manytomany
     def category(self):

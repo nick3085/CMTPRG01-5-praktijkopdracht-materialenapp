@@ -24,4 +24,4 @@ urlpatterns = [
 
       # /materialmanager/pdf/
       url(r'^pdf/$', views.get_pdf, name='delivery-pdf'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

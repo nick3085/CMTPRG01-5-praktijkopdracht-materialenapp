@@ -19,13 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from . import views
-
-
 urlpatterns = [
     url(r'^materialmanager/', include('materialmanager.urls', app_name="materialmanager", namespace='delivery')),
     url(r'^admin/', admin.site.urls, name='admin'),
-    # url(r'^$', views.index, name='index'),
     url(r'^$', auth_views.login, {'template_name': 'auth/login.html'}),
     url(r'^logout/$', auth_views.logout, {'template_name': 'auth/logout.html'}),
 ]
