@@ -57,5 +57,3 @@ def get_pdf(request):
         return HttpResponse(result.getvalue(), content_type='application/pdf', )
     return HttpResponse('We had some errors<pre>%s</pre>')
 
-
-

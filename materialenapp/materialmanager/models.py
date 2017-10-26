@@ -1,16 +1,9 @@
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django_resized import ResizedImageField
 from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-
-if settings.DEBUG:
-    link = 'http://127.0.0.1:8000'
-
-else:
-    link = 'http://buurman.nickderonde.tech'
 
 
 # location model
@@ -66,8 +59,6 @@ class Delivery(models.Model):
                               upload_to=upload_location,
                               blank=False,
                               null=False)
-    # height_field = models.IntegerField(default=0)
-    # width_field = models.IntegerField(default=0)
     PROCESSING_CHOICES = (
         (0, '0%'),
         (25, '25%'),
@@ -87,7 +78,7 @@ class Delivery(models.Model):
     class Meta:
         db_table = "delivery"
         verbose_name_plural = "deliveries"
-        ordering = ('date', 'supplier', 'processing', 'weight',)
+        ordering = ('-date', 'supplier', 'processing', 'weight',)
 
     def __str__(self):
         return self.date.strftime("%A, %d. %B %Y %I:%M%p")
@@ -103,9 +94,11 @@ class Delivery(models.Model):
 
     # Function for showing the full image
     def image_pdf(self):
-        return link + self.photo.url
+        return 'https://buurman.nickderonde.tech' + self.photo.url
 
     image.allow_tags = True
+    image_full.allow_tags = True
+    image_pdf.allow_tags = True
 
     # return the model categories as string manytomany
     def category(self):
