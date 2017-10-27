@@ -6,6 +6,10 @@
     margin-top: 1rem;
 }
 
+img.card {
+  min-height: 10rem;
+}
+
 p.categories {
     min-height: 3rem;
 }
